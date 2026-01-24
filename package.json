@@ -1,0 +1,23 @@
+{
+  "author": "Joe Opseth",
+  "license": "MIT-0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/joe-op/react-hcaptcha-test.git"
+  },
+  "homepage": "https://github.com/joe-op/react-hcaptcha-test#readme",
+  "scripts": {
+    "bundle": "bin/bundle",
+    "serve": "mkdir -p dist && cp src/index.html dist/ && bin/bundle && npx esbuild --servedir=dist --outdir=dist/js",
+    "serve:watch": "watchexec -e html,js,jsx -w src --restart npm run serve"
+  },
+  "dependencies": {
+    "@hcaptcha/react-hcaptcha": "~1.14.0",
+    "react": "~19.2.3",
+    "react-dom": "~19.2.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.2",
+    "prettier": "~3.8.1"
+  }
+}

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+esbuild --bundle src/reacttest/App.jsx --outdir=dist/js
