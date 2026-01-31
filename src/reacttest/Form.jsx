@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import ExtendedHCaptcha from './ExtendedHCaptcha';
 
 function FormError({ error }) {
 	if (error) {
@@ -28,38 +28,37 @@ export default function Form({ siteKey }) {
 	};
 
 	const [error, setError] = useState(null);
+	const [executeRequested, setExecuteRequested] = useState(null);
+	const [tick, setTick] = useState(0);
 	const [token, setToken] = useState(null);
-	const captchaRef = useRef(null);
 
 	const onLoad = () => {
 		console.debug('HCaptcha loaded');
 	};
 
 	const run = () => {
-		try {
-			captchaRef.current.execute({ async: false });
-		} catch (err) {
-			setError(`Running hcaptcha failed. Error: ${err}`);
-		}
+		setExecuteRequested(true);
+		setTick(tick + 1);
 	};
 
 	return (
 		<form>
 			<p>
 				Invisible HCaptcha has been rendered. Click 'Submit' to trigger
-				hcaptcha.
+				HCaptcha.
 			</p>
 			<button onClick={run} type={'button'}>
 				Submit
 			</button>
-			<HCaptcha
+			<ExtendedHCaptcha
 				sitekey={siteKey}
 				size={'invisible'}
 				onLoad={onLoad}
 				onVerify={(token, ekey) =>
 					handleVerificationSuccess(token, ekey)
 				}
-				ref={captchaRef}
+				executeRequested={executeRequested}
+				tick={tick}
 			/>
 
 			<FormToken token={token} />

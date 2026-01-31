@@ -9,6 +9,7 @@
   "scripts": {
     "bundle": "bin/bundle",
     "format": "node_modules/.bin/prettier --write ./**/*.jsx",
+    "format:watch": "watchexec -e js,jsx -w src npm run format",
     "serve": "mkdir -p dist && cp src/index.html dist/ && bin/bundle && bin/rundevserver",
     "serve:watch": "watchexec -e html,js,jsx -w src --restart npm run serve"
   },
