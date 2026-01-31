@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+host="${REACT_HCAPTCHA_TEST_HOST:-0.0.0.0}"
+port="${REACT_HCAPTCHA_TEST_PORT:-8000}"
+
+if [ -d "node_modules/.bin" ]; then
+  PATH="$PATH:$(realpath node_modules/.bin)"
+fi
+
+esbuild --serve=$host:$port --servedir=dist --outdir=dist/js
